@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { mutate } from "swr";
 import { useAuth } from "@/lib/auth";
-import { createSite } from "@/lib/firestore";
+import { createSite } from "@/lib/db";
 import {
   Modal,
   ModalOverlay,
