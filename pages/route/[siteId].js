@@ -5,7 +5,7 @@ import { Box, FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
 import Feedback from "@/components/Feedback";
 import { useAuth } from "@/lib/auth";
 import { createFeedback } from "@/lib/db";
-import { getAllFeedback, getAllSites } from "@/lib/db-admin";
+import { getAllFeedback, getUserSites } from "@/lib/db-admin";
 
 export async function getStaticProps(context) {
   const siteId = context.params.siteId;
@@ -15,11 +15,12 @@ export async function getStaticProps(context) {
     props: {
       initialFeedback: feedback,
     },
+    unstable_revalidate: 1,
   };
 }
 
 export async function getStaticPaths() {
-  const { sites } = await getAllSites();
+  const { sites } = await getUserSites(); // Needs uid
   const paths = sites.map((site) => ({
     params: {
       siteId: site.id.toString(),
