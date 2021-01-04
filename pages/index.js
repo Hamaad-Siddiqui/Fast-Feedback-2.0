@@ -33,14 +33,30 @@ export default function Home() {
         </Head>
         <Logo mb={2} size="64px" />
         <Heading m={5}>Fast Feedback</Heading>
-        {auth.user ? (
+        <Stack>
           <Button
-            as="a"
-            href="/dashboard"
+            onClick={() => auth.signinWithGitHub()}
+            backgroundColor="gray.900"
+            color="white"
+            fontWeight="medium"
+            leftIcon={<GitHub />}
+            mt={4}
+            size="lg"
+            _hover={{ bg: "gray.700" }}
+            _active={{
+              bg: "gray.800",
+              transform: "scale(0.95)",
+            }}
+          >
+            Sign In with GitHub
+          </Button>
+          <Button
+            onClick={() => auth.signinWithGoogle()}
             backgroundColor="white"
             color="gray.900"
             variant="outline"
             fontWeight="medium"
+            leftIcon={<Google />}
             mt={4}
             size="lg"
             _hover={{ bg: "gray.100" }}
@@ -49,45 +65,9 @@ export default function Home() {
               transform: "scale(0.95)",
             }}
           >
-            View Dashboard
+            Sign In with Google
           </Button>
-        ) : (
-          <Stack>
-            <Button
-              onClick={() => auth.signinWithGitHub()}
-              backgroundColor="gray.900"
-              color="white"
-              fontWeight="medium"
-              leftIcon={<GitHub />}
-              mt={4}
-              size="lg"
-              _hover={{ bg: "gray.700" }}
-              _active={{
-                bg: "gray.800",
-                transform: "scale(0.95)",
-              }}
-            >
-              Sign In with GitHub
-            </Button>
-            <Button
-              onClick={() => auth.signinWithGoogle()}
-              backgroundColor="white"
-              color="gray.900"
-              variant="outline"
-              fontWeight="medium"
-              leftIcon={<Google />}
-              mt={4}
-              size="lg"
-              _hover={{ bg: "gray.100" }}
-              _active={{
-                bg: "gray.100",
-                transform: "scale(0.95)",
-              }}
-            >
-              Sign In with Google
-            </Button>
-          </Stack>
-        )}
+        </Stack>
       </Flex>
     </Box>
   );

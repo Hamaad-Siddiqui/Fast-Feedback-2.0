@@ -37,13 +37,7 @@ const DashboardShell = ({ children }) => {
           </Flex>
           <Flex justifyContent="center" alignItems="center">
             {user && (
-              <Button
-                variant="ghost"
-                mr={2}
-                as="a"
-                href="/"
-                onClick={() => signout()}
-              >
+              <Button variant="ghost" mr={2} onClick={() => signout()}>
                 Log Out
               </Button>
             )}
