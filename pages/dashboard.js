@@ -1,24 +1,28 @@
 import useSWR from "swr";
 import { useAuth } from "@/lib/auth";
 import DashboardShell from "@/components/DashboardShell";
-import EmptyState from "@/components/EmptyState";
-import fetcher from "@/utils/fetcher";
 import SiteTableSkeleton from "@/components/SiteTableSkeleton";
+import SiteTableHeader from "@/components/SiteTableHeader";
+import EmptyState from "@/components/EmptyState";
 import SiteTable from "@/components/SiteTable";
+import fetcher from "@/utils/fetcher";
 
 const Dashboard = () => {
   const { user } = useAuth();
   const { data } = useSWR(user ? ["/api/sites", user.token] : null, fetcher);
+  console.log(data);
   if (!data) {
     return (
       <DashboardShell>
+        <SiteTableHeader />
         <SiteTableSkeleton />
       </DashboardShell>
     );
   }
   return (
     <DashboardShell>
-      {data.sites ? <SiteTable sites={data.sites} /> : <EmptyState />}
+      <SiteTableHeader />
+      {data.sites.length ? <SiteTable sites={data.sites} /> : <EmptyState />}
     </DashboardShell>
   );
 };
