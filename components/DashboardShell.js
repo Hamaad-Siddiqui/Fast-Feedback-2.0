@@ -8,7 +8,12 @@ const DashboardShell = ({ children }) => {
 
   return (
     <Box backgroundColor="gray.100" h="100vh">
-      <Flex backgroundColor="white" mb={16} w="full">
+      <Flex
+        backgroundColor="white"
+        mb={[8, 16]}
+        w="full"
+        borderTop="5px solid #0AF5F4"
+      >
         <Flex
           alignItems="center"
           justifyContent="space-between"
@@ -18,12 +23,14 @@ const DashboardShell = ({ children }) => {
           margin="0 auto"
           w="full"
           px={8}
-          h="70px"
+          h="60px"
         >
           <Flex>
             <NextLink href="/" passHref>
               <Box>
-                <Logo size="24px" />
+                <Link>
+                  <Logo size="24px" />
+                </Link>
               </Box>
             </NextLink>
             <NextLink href="/dashboard" passHref>
@@ -37,15 +44,25 @@ const DashboardShell = ({ children }) => {
           </Flex>
           <Flex justifyContent="center" alignItems="center">
             {user && (
-              <Button variant="ghost" mr={2} onClick={() => signout()}>
+              <Button
+                as="a"
+                href="/"
+                variant="ghost"
+                mr={2}
+                onClick={() => signout()}
+              >
                 Log Out
               </Button>
             )}
-            <Avatar size="sm" src={user?.photoUrl} />
+            <NextLink href="/account" passHref>
+              <Link>
+                <Avatar size="sm" src={user?.photoUrl} />
+              </Link>
+            </NextLink>
           </Flex>
         </Flex>
       </Flex>
-      <Flex margin="0 auto" direction="column" maxW="1250px" px={8}>
+      <Flex margin="0 auto" direction="column" maxW="1250px" px={[0, 8, 8]}>
         {children}
       </Flex>
     </Box>
